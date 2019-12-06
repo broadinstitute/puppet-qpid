@@ -121,8 +121,8 @@ describe 'qpid' do
           is_expected.to contain_systemd__dropin_file('wait-for-port.conf')
             .with_ensure('present')
             .that_notifies('Service[qpidd]')
-            .that_requires('Package[nc]')
-          is_expected.to contain_package('nc')
+            .that_requires('Package[nmap-ncat]')
+          is_expected.to contain_package('nmap-ncat')
             .with_ensure('present')
           verify_exact_contents(catalogue, '/etc/systemd/system/qpidd.service.d/wait-for-port.conf', [
             "[Service]",
