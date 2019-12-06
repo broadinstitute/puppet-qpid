@@ -1,7 +1,9 @@
 # Handles Qpid service
 #
 # @api private
-class qpid::service {
+class qpid::service (
+  $nc_package_name = $qpid::params::nc_package_name
+) {
 
   service { 'qpidd':
     ensure     => running,
@@ -35,7 +37,7 @@ class qpid::service {
 
     if $qpid::ssl {
       ensure_packages(['nmap-ncat'])
-      Package['nmap-ncat'] -> Systemd::Dropin_file['wait-for-port.conf']
+      Package[$qpid::params::nc_package_name] -> Systemd::Dropin_file['wait-for-port.conf']
     }
   }
 }

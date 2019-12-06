@@ -41,4 +41,10 @@ class qpid::params {
   $server_store_package = 'qpid-cpp-server-linearstore'
 
   $custom_settings = {}
+  if ($::osfamily == 'RedHat' )and (versioncmp($::operatingsystemmajrelease, '7') >= 0 ) {
+    nc_package_name = 'nmap-ncat'
+  } else {
+    nc_package_name = 'nc'
+  }
+  
 }
